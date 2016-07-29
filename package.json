@@ -1,0 +1,25 @@
+{
+  "name": "memory_easeljs",
+  "version": "0.1.0",
+  "description": "Simple memory game using easeljs, es6. With tests using Karma and jasmine",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "WI-FRONT",
+  "license": "ISC",
+  "devDependencies": {
+    "babelify": "~5.0.3",
+    "browserify": "^9.0.3",
+    "createjs-collection": "^0.8.2-1",
+    "gulp": "~3.8.11",
+    "jasmine-core": "^2.4.1",
+    "karma": "^1.1.2",
+    "karma-browserify": "~3.0.2",
+    "karma-chrome-launcher": "^1.0.1",
+    "karma-jasmine": "^1.0.2",
+    "karma-jasmine-html-reporter": "^0.2.1",
+    "karma-phantomjs-launcher": "^1.0.1",
+    "watchify": "^3.7.0"
+  }
+}
