@@ -1,5 +1,6 @@
 import { COLORS } from './constants';
 import Card from './Card';
+let Shape = window.createjs.Stage;
 
 export default class Grid {
     constructor() {
@@ -9,18 +10,26 @@ export default class Grid {
     }
 
     fillCards() {
-        for (var i = 0; i < this.size/2; i++) {
-            let positions = calculatePositions(i);
-            let card1 = new Card(COLORS[i]);
-            let card2 = new Card(COLORS[i]);
+        for (var i = 0; i < this.size; i++) {
+            var row = Math.floor(i/4);
+            var color = Math.floor(i % 8);
+            var column = Math.floor(i % 4);
+            let x = this.calculatePosition(column);
+            let y = this.calculatePosition(row);
 
-            this.cards.push(card1)
-            this.cards.push(card2);
+            let card = new Card({
+                color: COLORS[color],
+                height: 90,
+                width: 90,
+                x,
+                y
+            });
+
+            this.cards.push(card);
         }
     }
 
-    calculatePositions(index) {
-        let x = index * 90 + 5;
-        let y = index * 90 + 5;
+    calculatePosition(index) {
+        return index * 90 + index * 5 + (index + 1) * 5;
     }
 }
