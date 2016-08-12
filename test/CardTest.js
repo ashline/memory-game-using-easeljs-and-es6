@@ -1,18 +1,25 @@
 import Card from '../src/Card.js';
-import { IMAGES } from '../src/constants.js';
+import { COLORS } from '../src/constants.js';
 
 describe('Card tests', function () {
 
     let card;
 
     beforeEach(() => {
-        card = new Card(IMAGES[1]);
+        const options = {
+            color: COLORS[1],
+            width: 90,
+            height: 90,
+            x: 5,
+            y: 5
+        }
+        card = new Card(options);
     });
 
-    it('should create new card', ()=>{
+    it('should create new card', () => {
         expect(card).toBeDefined();
-        expect(card.imageUrl).toBeDefined();
-        expect(card.imageUrl).not.toEqual('');
+        expect(card.color).toBeDefined();
+        expect(card.color).not.toEqual('');
         expect(card.visible).toEqual(false);
         expect(card.isMatched).toEqual(false);
     });
@@ -51,4 +58,19 @@ describe('Card tests', function () {
         expect(card.visible).toEqual(false);
     });
 
+    it('should be a shape', () => {
+        expect(card.draw).toBeDefined();
+    });
+
+    it('should know its size', () => {
+        expect(card.width).toBeDefined();
+        expect(card.height).toBeDefined();
+    });
+
+    it('should know its position', () => {
+        expect(card.x).toBeDefined();
+        expect(card.y).toBeDefined();
+        expect(card.y).not.toEqual(0);
+        expect(card.x).not.toEqual(0);
+    });
 });

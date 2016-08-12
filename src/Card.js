@@ -1,7 +1,11 @@
-export default class Card {
-    constructor(imageUrl) {
-        this.imageUrl = imageUrl;
+let Shape = window.createjs.Shape;
+
+export default class Card extends Shape {
+    constructor(options) {
+        super();
+        Object.assign(this, options);
         this.init();
+        return this;
     }
 
     toggleVisibility() {
