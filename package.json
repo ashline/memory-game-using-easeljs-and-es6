@@ -9,6 +9,7 @@
   "author": "WI-FRONT",
   "license": "ISC",
   "devDependencies": {
+    "babel-polyfill": "6.13.0",
     "babelify": "~5.0.3",
     "browser-sync": "^2.15.0",
     "browserify": "^9.0.3",

@@ -1,3 +1,5 @@
+import "babel-polyfill";
+
 var createjs = require('createjs-collection');
 
 function initApp() {
