@@ -15,7 +15,6 @@ module.exports = function(config) {
 
         // list of files / patterns to load in the browser
         files: [
-            'node_modules/createjs-collection/vendor_modules/EaselJS-0.8.1/lib/easeljs-0.8.1.min.js',
             'src/**/*.js',
             'test/**/*.js'
         ],
@@ -30,7 +29,7 @@ module.exports = function(config) {
         // preprocess matching files before serving them to the browser
         // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
         preprocessors: {
-            'src/!(dist)/**/*.js': ['browserify'],
+            'src/**/!(bundle).js': ['browserify'],
             'test/**/*.js': ['browserify']
         },
 
