@@ -8,10 +8,6 @@ describe('Game tests', function() {
         game.init();
     });
 
-    function flipCard(index) {
-        game.grid.cards[index].faceUp = !game.grid.cards[index].faceUp;
-    }
-
     // it('should set initial state of game', () => {
     //     spyOn(game, 'init');
     //     game
@@ -25,12 +21,24 @@ describe('Game tests', function() {
     });
 
     it('should not have 3 uncovered unmatched cards', () => {
-        flipCard(0);
-        flipCard(3);
-        flipCard(5);
+        game.flipCard(0);
+        game.flipCard(3);
+        game.flipCard(5);
         expect(game.grid.cards[0].faceUp).toBeFalsy();
         expect(game.grid.cards[3].faceUp).toBeFalsy();
         expect(game.grid.cards[5].faceUp).toBeTruthy();
-
+    });
+    it('should match 2 uncovered matching cards', () => {
+        game.flipCard(0);
+        game.flipCard(8);
+        expect(game.grid.cards[0].isMatched).toBeTruthy();
+        expect(game.grid.cards[8].isMatched).toBeTruthy();
+    });
+    it('should cover cards that are not matching', () => {
+        game.flipCard(0);
+        game.flipCard(1);
+        expect(game.grid.cards[0].isMatched).toBeFalsy();
+        expect(game.grid.cards[1].isMatched).toBeFalsy();
+        expect(game.grid.getFaceUpCards().length).toEqual(0);
     });
 });

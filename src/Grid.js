@@ -1,6 +1,7 @@
 import { COLORS } from './constants';
 import Card from './Card';
 let Stage = require('createjs-collection').Stage;
+let _ = require('lodash');
 
 export default class Grid {
     constructor() {
@@ -27,6 +28,52 @@ export default class Grid {
 
             this.cards.push(card);
         }
+    }
+
+    isPossibleToFlipCard() {
+        let coveredCards = _.filter(this.cards, {
+            faceUp: false
+        });
+
+        return coveredCards.length ? true : false;
+    }
+
+    twoUnmatchedCardsAreFaceup() {
+        let faceupCards = this.getFaceUpCards();
+        return faceupCards.length === 2 ? true : false;
+    }
+
+    getFaceUpCards() {
+        return _.filter(this.cards, {
+            faceUp: true,
+            isMatched: false
+        });
+    }
+
+    coverCards() {
+        let faceupCards = this.getFaceUpCards();
+
+        _.each(faceupCards, card => {
+            card.faceUp = false;
+        })
+    }
+    anyMatchingCards() {
+        let faceupCards = this.getFaceUpCards();
+        if(faceupCards.length == 1) return false;
+
+        if(faceupCards[0].color === faceupCards[1].color) return true;
+
+        return false;
+    }
+    matchCards() {
+        let faceupCards = this.getFaceUpCards();
+
+        _.each(faceupCards, card => {
+            card.isMatched = true;
+        })
+    }
+    flipCard(index) {
+        this.cards[index].faceUp = !this.cards[index].faceUp;
     }
 
     calculatePosition(index) {
