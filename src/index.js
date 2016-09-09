@@ -1,6 +1,7 @@
-// import "babel-polyfill";
+import "babel-polyfill";
 import Grid from './Grid';
-import DEFAULT_COLOR from './constants';
+import { DEFAULT_COLOR } from './constants';
+
 var createjs = require('createjs-collection');
 var _ = require('lodash');
 
@@ -29,7 +30,7 @@ export default class Game {
     }
 
     drawCards() {
-        let color = 'gray';
+        let color = DEFAULT_COLOR;
         _.each(this.grid.cards, card => {
             if(card.faceUp) {
                 color = card.color;

@@ -8,4 +8,4 @@ export const COLORS = [
     'magenta',
     'yellow'
 ];
-export const DEFAULT_COLOR = 'red';
+export const DEFAULT_COLOR = '#333';

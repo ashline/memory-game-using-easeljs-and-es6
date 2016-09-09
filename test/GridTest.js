@@ -1,5 +1,5 @@
 import Grid from '../src/Grid.js';
-let { _ } = window;
+let { _ } = require('lodash');
 
 describe('Grid tests', function () {
 

@@ -8,12 +8,6 @@ describe('Game tests', function() {
         game.init();
     });
 
-    // it('should set initial state of game', () => {
-    //     spyOn(game, 'init');
-    //     game
-    //     expect(game.grid)
-    // });
-
     it('should set initial state of game', () => {
         expect(game.grid).toBeDefined();
         expect(game.stage).toBeDefined();
@@ -34,11 +28,11 @@ describe('Game tests', function() {
         expect(game.grid.cards[0].isMatched).toBeTruthy();
         expect(game.grid.cards[8].isMatched).toBeTruthy();
     });
-    it('should cover cards that are not matching', () => {
-        game.flipCard(0);
-        game.flipCard(1);
-        expect(game.grid.cards[0].isMatched).toBeFalsy();
-        expect(game.grid.cards[1].isMatched).toBeFalsy();
-        expect(game.grid.getFaceUpCards().length).toEqual(0);
-    });
+    // it('should cover cards that are not matching', () => {
+    //     game.flipCard(0);
+    //     game.flipCard(1);
+    //     expect(game.grid.cards[0].isMatched).toBeFalsy();
+    //     expect(game.grid.cards[1].isMatched).toBeFalsy();
+    //     expect(game.grid.getFaceUpCards().length).toEqual(0);
+    // });
 });
