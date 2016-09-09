@@ -1,5 +1,7 @@
-import { IMAGES } from './constants';
+import { COLORS } from './constants';
 import Card from './Card';
+let Stage = require('createjs-collection').Stage;
+let _ = require('lodash');
 
 export default class Grid {
     constructor() {
@@ -9,12 +11,72 @@ export default class Grid {
     }
 
     fillCards() {
-        for (var i = 0; i < this.size/2; i++) {
-            let card1 = new Card(IMAGES[i]);
-            let card2 = new Card(IMAGES[i]);
+        for (var i = 0; i < this.size; i++) {
+            var row = Math.floor(i/4);
+            var color = Math.floor(i % 8);
+            var column = Math.floor(i % 4);
+            let x = this.calculatePosition(column);
+            let y = this.calculatePosition(row);
 
-            this.cards.push(card1)
-            this.cards.push(card2);
+            let card = new Card({
+                color: COLORS[color],
+                height: 90,
+                width: 90,
+                x,
+                y
+            });
+
+            this.cards.push(card);
         }
+    }
+
+    isPossibleToFlipCard() {
+        let coveredCards = _.filter(this.cards, {
+            faceUp: false
+        });
+
+        return coveredCards.length ? true : false;
+    }
+
+    twoUnmatchedCardsAreFaceup() {
+        let faceupCards = this.getFaceUpCards();
+        return faceupCards.length === 2 ? true : false;
+    }
+
+    getFaceUpCards() {
+        return _.filter(this.cards, {
+            faceUp: true,
+            isMatched: false
+        });
+    }
+
+    coverCards() {
+        let faceupCards = this.getFaceUpCards();
+
+        _.each(faceupCards, card => {
+            card.faceUp = false;
+        })
+    }
+    anyMatchingCards() {
+        let faceupCards = this.getFaceUpCards();
+        if(faceupCards.length == 1) return false;
+
+        if(faceupCards[0].color === faceupCards[1].color) return true;
+
+        return false;
+    }
+    matchCards() {
+        let faceupCards = this.getFaceUpCards();
+
+        _.each(faceupCards, card => {
+            card.isMatched = true;
+        })
+    }
+    flipCard(index) {
+        this.cards[index].faceUp = !this.cards[index].faceUp;
+    }
+
+    calculatePosition(index) {
+        return index * 90 + index * 5 + (index + 1) * 5;
     }
 }
