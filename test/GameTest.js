@@ -22,17 +22,19 @@ describe('Game tests', function() {
         expect(game.grid.cards[3].faceUp).toBeFalsy();
         expect(game.grid.cards[5].faceUp).toBeTruthy();
     });
+
     it('should match 2 uncovered matching cards', () => {
         game.flipCard(0);
         game.flipCard(8);
         expect(game.grid.cards[0].isMatched).toBeTruthy();
         expect(game.grid.cards[8].isMatched).toBeTruthy();
     });
-    // it('should cover cards that are not matching', () => {
-    //     game.flipCard(0);
-    //     game.flipCard(1);
-    //     expect(game.grid.cards[0].isMatched).toBeFalsy();
-    //     expect(game.grid.cards[1].isMatched).toBeFalsy();
-    //     expect(game.grid.getFaceUpCards().length).toEqual(0);
-    // });
+
+    it('should cover cards that are not matching', () => {
+        game.flipCard(0);
+        game.flipCard(1);
+        expect(game.grid.cards[0].isMatched).toBeFalsy();
+        expect(game.grid.cards[1].isMatched).toBeFalsy();
+        expect(game.grid.getFaceUpCards().length).toEqual(0);
+    });
 });
