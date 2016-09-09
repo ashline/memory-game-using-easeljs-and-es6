@@ -1,4 +1,8 @@
-function init() {
+import "babel-polyfill";
+
+var createjs = require('createjs-collection');
+
+function initApp() {
     console.log(1);
     var stage = new createjs.Stage("demoCanvas");
     var circle = new createjs.Shape();
@@ -7,4 +11,8 @@ function init() {
     circle.y = 100;
     stage.addChild(circle);
     stage.update();
+}
+
+window.onload = () => {
+    initApp();
 }

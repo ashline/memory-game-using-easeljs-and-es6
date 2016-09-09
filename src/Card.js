@@ -1,4 +1,4 @@
-let Shape = window.createjs.Shape;
+let Shape = require('createjs-collection').Shape;
 
 export default class Card extends Shape {
     constructor(options) {

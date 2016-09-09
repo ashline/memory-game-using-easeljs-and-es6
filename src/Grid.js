@@ -1,6 +1,6 @@
 import { COLORS } from './constants';
 import Card from './Card';
-let Shape = window.createjs.Stage;
+let Stage = require('createjs-collection').Stage;
 
 export default class Grid {
     constructor() {
