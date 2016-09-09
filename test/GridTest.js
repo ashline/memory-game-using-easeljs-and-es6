@@ -1,4 +1,5 @@
 import Grid from '../src/Grid.js';
+let { _ } = window;
 
 describe('Grid tests', function () {
 
@@ -16,5 +17,10 @@ describe('Grid tests', function () {
         expect(grid.cards[3].x).not.toEqual(0);
         expect(grid.cards[1].x).toEqual(105);
         expect(grid.cards[1].y).toEqual(5);
+    });
+
+    it('should have 8 colors only', () => {
+        let colors = Object.keys(_.countBy(grid.cards, 'color'));
+        expect(colors.length).toEqual(8);
     });
 });

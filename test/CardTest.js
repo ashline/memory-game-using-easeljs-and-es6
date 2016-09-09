@@ -20,42 +20,43 @@ describe('Card tests', function () {
         expect(card).toBeDefined();
         expect(card.color).toBeDefined();
         expect(card.color).not.toEqual('');
-        expect(card.visible).toEqual(false);
+        expect(card.visible).toEqual(true);
+        expect(card.faceUp).toEqual(false);
         expect(card.isMatched).toEqual(false);
     });
 
-    it('should allow toggling of visibility', () => {
-        card.toggleVisibility();
-        expect(card.visible).toEqual(true);
-        card.toggleVisibility();
-        expect(card.visible).toEqual(false);
+    it('should allow flipping of card', () => {
+        card.flipCard();
+        expect(card.faceUp).toEqual(true);
+        card.flipCard();
+        expect(card.faceUp).toEqual(false);
     });
 
-    it('should prevent setting matched of invisible card', () => {
+    it('should prevent setting matched of card facing down', () => {
         card.setMatched();
         expect(card.isMatched).toBeFalsy();
     });
 
     it('should allow setting of matched', () => {
-        card.toggleVisibility();
+        card.flipCard();
         card.setMatched();
         expect(card.isMatched).toEqual(true);
     });
 
     it('should prevent toggling visibility after being matched', () => {
-        card.toggleVisibility();
+        card.flipCard();
         card.setMatched();
-        card.toggleVisibility();
+        card.flipCard();
         expect(card.isMatched).toEqual(true);
-        expect(card.visible).toEqual(true);
+        expect(card.faceUp).toEqual(true);
     });
 
     it('should be restorable to initial state', () => {
-        card.toggleVisibility();
+        card.flipCard();
         card.setMatched();
         card.init();
         expect(card.isMatched).toEqual(false);
-        expect(card.visible).toEqual(false);
+        expect(card.faceUp).toEqual(false);
     });
 
     it('should be a shape', () => {

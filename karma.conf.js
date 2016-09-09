@@ -16,6 +16,7 @@ module.exports = function(config) {
         // list of files / patterns to load in the browser
         files: [
             'node_modules/createjs-collection/vendor_modules/EaselJS-0.8.1/lib/easeljs-0.8.1.min.js',
+            'node_modules/lodash/lodash.min.js',
             'src/**/*.js',
             'test/**/*.js'
         ],

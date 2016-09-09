@@ -1,18 +1,37 @@
 import "babel-polyfill";
+import Grid from './Grid';
 
-var createjs = require('createjs-collection');
+export default class Game {
+    constructor() {
+        this.grid = new Grid();
+        this.stage = new createjs.Stage("demoCanvas");
+    }
 
-function initApp() {
-    console.log(1);
-    var stage = new createjs.Stage("demoCanvas");
-    var circle = new createjs.Shape();
-    circle.graphics.beginFill("DeepSkyBlue").drawRect(0, 0, 50, 100);
-    circle.x = 100;
-    circle.y = 100;
-    stage.addChild(circle);
-    stage.update();
+    addCardsToStage() {
+        for (var i = 0; i < this.grid.cards.length; i++) {
+            this.stage.addChild(this.grid.cards[i]);
+        }
+    }
+
+    init() {
+        this.addCardsToStage();
+        this.updateStage();
+    }
+
+    updateStage() {
+        this.stage.update();
+    }
+
+    flipCard(index) {
+
+    }
+}
+
+function initGame() {
+    var game = new Game();
+    game.init();
 }
 
 window.onload = () => {
-    initApp();
+    initGame();
 }
