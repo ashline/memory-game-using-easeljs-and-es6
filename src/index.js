@@ -13,6 +13,7 @@ export default class Game {
         this.stage = new createjs.Stage("demoCanvas");
     }
 
+
     addCardsToStage() {
         for (var i = 0; i < this.grid.cards.length; i++) {
             this.stage.addChild(this.grid.cards[i]);
@@ -20,6 +21,8 @@ export default class Game {
     }
 
     init() {
+        // reset grid
+        //clear stage
         this.addCardsToStage();
         this.updateStage();
     }
@@ -39,18 +42,27 @@ export default class Game {
         });
     }
 
-    flipCard(index) {
-        var isPossibleToFlipCard = this.grid.isPossibleToFlipCard();
-        var twoUnmatchedCardsAreFaceup = this.grid.twoUnmatchedCardsAreFaceup();
-
+    coverUnmatchedCards() {
+        const twoUnmatchedCardsAreFaceup = this.grid.twoUnmatchedCardsAreFaceup();
         if(twoUnmatchedCardsAreFaceup) {
             this.grid.coverCards();
         }
+    }
 
-        if(isPossibleToFlipCard) {
+    flipCard(index) {
+        const isPossibleToFlipCard = this.grid.isPossibleToFlipCard();
+        const isPossibleToFlipCardAt = this.grid.isPossibleToFlipCardAt(index);
+
+        this.coverUnmatchedCards();
+
+        if(isPossibleToFlipCard && isPossibleToFlipCardAt) {
             this.grid.flipCard(index);
             if(this.grid.anyMatchingCards()) {
                 this.grid.matchCards();
+            } else {
+                setTimeout( () => {
+                    this.grid.coverCards();
+                }, 1000);
             }
         }
     }

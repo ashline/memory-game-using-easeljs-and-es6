@@ -7,19 +7,23 @@ export default class Grid {
     constructor() {
         this.size = 16;
         this.cards = [];
-        this.fillCards();
+        this.fillCards(this.shuffleColors());
     }
 
-    fillCards() {
+    shuffleColors() {
+        const cardColors = [...COLORS, ...COLORS];
+        return _.shuffle(cardColors);
+    }
+
+    fillCards(cardColors) {
         for (var i = 0; i < this.size; i++) {
             var row = Math.floor(i/4);
-            var color = Math.floor(i % 8);
             var column = Math.floor(i % 4);
             let x = this.calculatePosition(column);
             let y = this.calculatePosition(row);
 
             let card = new Card({
-                color: COLORS[color],
+                color: cardColors[i],
                 height: 90,
                 width: 90,
                 x,
@@ -28,6 +32,10 @@ export default class Grid {
 
             this.cards.push(card);
         }
+    }
+
+    isPossibleToFlipCardAt(index) {
+        return !this.cards[index].faceUp;
     }
 
     isPossibleToFlipCard() {
@@ -57,6 +65,7 @@ export default class Grid {
             card.faceUp = false;
         })
     }
+
     anyMatchingCards() {
         let faceupCards = this.getFaceUpCards();
         if(faceupCards.length == 1) return false;
